@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { motion, type Variants } from "framer-motion"
-import { Home } from "lucide-react"
+import { Home, History } from "lucide-react"
 import confetti from "canvas-confetti"
 import type { Options as ConfettiOptions } from "canvas-confetti"
 
@@ -16,6 +16,7 @@ interface ResultsScreenProps {
   score: number
   history: Array<{ date: string; subject: string; score: number }>
   onReturnHome: () => void
+  onViewHistory: () => void
 }
 
 interface MotivationalMessage {
@@ -24,7 +25,15 @@ interface MotivationalMessage {
   icon: string
 }
 
-export default function ResultsScreen({ name, subject, difficulty, score, history, onReturnHome }: ResultsScreenProps) {
+export default function ResultsScreen({
+  name,
+  subject,
+  difficulty,
+  score,
+  history,
+  onReturnHome,
+  onViewHistory,
+}: ResultsScreenProps) {
   const [showConfetti, setShowConfetti] = useState(false)
 
   useEffect(() => {
@@ -116,86 +125,92 @@ export default function ResultsScreen({ name, subject, difficulty, score, histor
   }
 
   return (
-    <motion.div
-      initial="initial"
-      animate="animate"
-      variants={containerAnimation}
-      transition={{ duration: 0.5 }}
-      className=""
-    >
-      <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-blue-700">¡Examen completado, {name}!</h2>
-        <p className="text-gray-600 mt-2">
-          {getSubjectName(subject)} - Nivel: {getDifficultyName(difficulty)}
-        </p>
-      </div>
-
-      <Card className="mb-8 overflow-hidden bg-blue-950/20">
-        <div className="text-center">
-          <div className="text-6xl font-bold mb-2">{score}/20</div>
-          <div className="text-xl">Tu puntaje</div>
+    <div className="p-6 md:p-8">
+      <motion.div
+        initial="initial"
+        animate="animate"
+        variants={containerAnimation}
+        transition={{ duration: 0.5 }}
+        className="py-6"
+      >
+        <div className="text-center mb-8">
+          <h2 className="text-2xl font-bold text-gray-800">¡Examen completado, {name.split(" ")[0]}!</h2>
+          <p className="text-gray-600 mt-2">
+            {getSubjectName(subject)} - Nivel: {getDifficultyName(difficulty)}
+          </p>
         </div>
-        <CardContent className="p-6">
-          <div className="text-center mb-4">
-            <div className="text-4xl mb-2">{message.icon}</div>
-            <h3 className="text-xl font-bold text-blue-700">{message.title}</h3>
-            <p className="text-gray-600 mt-2">{message.message}</p>
-          </div>
-        </CardContent>
-      </Card>
 
-      <Tabs defaultValue="progress" className="mb-8">
-        <TabsList className="grid w-full grid-cols-2">
-          <TabsTrigger value="progress">Tu Progreso</TabsTrigger>
-          <TabsTrigger value="history">Historial</TabsTrigger>
-        </TabsList>
-        <TabsContent value="progress" className="p-4">
-          <div className="space-y-4">
-            <div className="flex justify-between items-center">
-              <span className="font-medium">Puntaje promedio:</span>
-              <span className="font-bold text-blue-700">{averageScore.toFixed(1)}/20</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="font-medium">Exámenes completados:</span>
-              <span className="font-bold text-blue-700">{subjectHistory.length}</span>
-            </div>
-            <div className="flex justify-between items-center">
-              <span className="font-medium">Mejor puntaje:</span>
-              <span className="font-bold text-blue-700">
-                {subjectHistory.length > 0 ? Math.max(...subjectHistory.map((h) => h.score)) : 0}
-                /20
-              </span>
-            </div>
+        <Card className="mb-8 overflow-hidden border-0 bg-white/60 backdrop-blur-sm shadow-md">
+          <div className="bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 p-6 text-white text-center">
+            <div className="text-6xl font-bold mb-2">{score}/20</div>
+            <div className="text-xl">Tu puntaje</div>
           </div>
-        </TabsContent>
-        <TabsContent value="history" className="p-4">
-          {history.length > 0 ? (
-            <div className="space-y-2">
-              {history
-                .slice()
-                .reverse()
-                .slice(0, 5)
-                .map((item, index) => (
-                  <div key={index} className="flex justify-between items-center p-2 border-b">
-                    <div>
-                      <div className="font-medium">{getSubjectName(item.subject)}</div>
-                      <div className="text-sm text-gray-500">{item.date}</div>
+          <CardContent className="p-6">
+            <div className="text-center mb-4">
+              <div className="text-4xl mb-2">{message.icon}</div>
+              <h3 className="text-xl font-bold text-blue-700">{message.title}</h3>
+              <p className="text-gray-600 mt-2">{message.message}</p>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Tabs defaultValue="progress" className="mb-8">
+          <TabsList className="grid w-full grid-cols-2">
+            <TabsTrigger value="progress">Tu Progreso</TabsTrigger>
+            <TabsTrigger value="history">Historial</TabsTrigger>
+          </TabsList>
+          <TabsContent value="progress" className="p-4 bg-white/60 backdrop-blur-sm rounded-md">
+            <div className="space-y-4">
+              <div className="flex justify-between items-center">
+                <span className="font-medium">Puntaje promedio:</span>
+                <span className="font-bold text-blue-700">{averageScore.toFixed(1)}/20</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="font-medium">Exámenes completados:</span>
+                <span className="font-bold text-blue-700">{subjectHistory.length}</span>
+              </div>
+              <div className="flex justify-between items-center">
+                <span className="font-medium">Mejor puntaje:</span>
+                <span className="font-bold text-blue-700">
+                  {subjectHistory.length > 0 ? Math.max(...subjectHistory.map((h) => h.score)) : 0}
+                  /20
+                </span>
+              </div>
+            </div>
+          </TabsContent>
+          <TabsContent value="history" className="p-4 bg-white/60 backdrop-blur-sm rounded-md">
+            {history.length > 0 ? (
+              <div className="space-y-2">
+                {history
+                  .slice()
+                  .reverse()
+                  .slice(0, 5)
+                  .map((item, index) => (
+                    <div key={index} className="flex justify-between items-center p-2 border-b border-gray-200">
+                      <div>
+                        <div className="font-medium">{getSubjectName(item.subject)}</div>
+                        <div className="text-sm text-gray-500">{item.date}</div>
+                      </div>
+                      <div className="font-bold text-blue-700">{item.score}/20</div>
                     </div>
-                    <div className="font-bold text-blue-700">{item.score}/20</div>
-                  </div>
-                ))}
-            </div>
-          ) : (
-            <div className="text-center py-4 text-gray-500">No hay historial disponible</div>
-          )}
-        </TabsContent>
-      </Tabs>
+                  ))}
+              </div>
+            ) : (
+              <div className="text-center py-4 text-gray-500">No hay historial disponible</div>
+            )}
+          </TabsContent>
+        </Tabs>
 
-      <div className="flex justify-center">
-        <Button onClick={onReturnHome} className="flex items-center bg-green-600 hover:bg-green-700 cursor-pointer">
-          <Home className="mr-2 h-5 w-5" /> Volver al Inicio
-        </Button>
-      </div>
-    </motion.div>
+        <div className="flex flex-col sm:flex-row justify-center gap-4">
+          <Button onClick={onReturnHome} className="flex items-center bg-blue-600 hover:bg-blue-700">
+            <Home className="mr-2 h-5 w-5" /> Volver al Inicio
+          </Button>
+
+          <Button onClick={onViewHistory} variant="outline" className="flex items-center border-blue-300 text-blue-700">
+            <History className="mr-2 h-5 w-5" /> Ver Historial Completo
+          </Button>
+        </div>
+      </motion.div>
+    </div>
   )
 }

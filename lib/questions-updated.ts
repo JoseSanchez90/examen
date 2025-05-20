@@ -1019,6 +1019,29 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
           type: "text",
           keywords: ["pulmón", "biodiversidad", "carbono", "oxígeno", "regulación", "clima", "lluvia", "ecosistema"],
         },
+        // Preguntas adicionales más difíciles
+        {
+          question: "¿Qué es la biocapacidad de un ecosistema?",
+          type: "multiple-choice",
+          options: [
+            "La capacidad de un área para producir recursos y absorber residuos",
+            "La cantidad de especies que viven en él",
+            "La temperatura promedio del ecosistema",
+            "La cantidad de lluvia que recibe anualmente",
+          ],
+          correctAnswer: "a",
+        },
+        {
+          question: "¿Qué es el Acuerdo de París y cuál es su objetivo principal?",
+          type: "multiple-choice",
+          options: [
+            "Un acuerdo comercial para vender productos ecológicos",
+            "Un acuerdo internacional para combatir el cambio climático",
+            "Un acuerdo para proteger la Torre Eiffel",
+            "Un acuerdo para reducir la contaminación solo en Europa",
+          ],
+          correctAnswer: "b",
+        },
       ]
     }
   }
@@ -1147,6 +1170,19 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
           options: ["Maestro", "Maéstro", "Maéstro", "Maestró"],
           correctAnswer: "a",
         },
+        // Preguntas adicionales más difíciles
+        {
+          question: "¿Cómo se escribe correctamente?",
+          type: "multiple-choice",
+          options: ["Vurro", "Burro", "Vuro", "Buro"],
+          correctAnswer: "b",
+        },
+        {
+          question: "¿Cómo se escribe correctamente?",
+          type: "multiple-choice",
+          options: ["Haber", "Haver", "A ver", "Aver"],
+          correctAnswer: "a",
+        },
       ]
     } else if (difficulty === "medium") {
       return [
@@ -1268,6 +1304,19 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
           question: "¿Cómo se escribe correctamente?",
           type: "multiple-choice",
           options: ["Cavo", "Cabo", "Kavo", "Kabo"],
+          correctAnswer: "b",
+        },
+        // Preguntas adicionales más difíciles
+        {
+          question: "¿Cuál es la forma correcta de escribir?",
+          type: "multiple-choice",
+          options: ["Exhuberante", "Exuberante", "Exuverante", "Exhuverante"],
+          correctAnswer: "b",
+        },
+        {
+          question: "¿Cuál es la forma correcta de escribir?",
+          type: "multiple-choice",
+          options: ["Absorver", "Absorber", "Absorver", "Absorber"],
           correctAnswer: "b",
         },
       ]
@@ -1394,6 +1443,19 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
           options: ["Subrrepticio", "Subrepticio", "Surrepticio", "Surepticio"],
           correctAnswer: "c",
         },
+        // Preguntas adicionales más difíciles
+        {
+          question: "¿Cuál es la forma correcta de escribir?",
+          type: "multiple-choice",
+          options: ["Adición", "Adisión", "Adicción", "Addicción"],
+          correctAnswer: "a",
+        },
+        {
+          question: "¿Cuál es la forma correcta de escribir?",
+          type: "multiple-choice",
+          options: ["Excentricidad", "Escentricidad", "Exentricidad", "Esentricidad"],
+          correctAnswer: "a",
+        },
       ]
     }
   }
@@ -1507,7 +1569,7 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
         {
           question: "¿Qué montaña es considerada la más alta de Perú?",
           type: "multiple-choice",
-          options: ["Huascarán", "Alpamayo", "Coropuna", "Yerupaj��"],
+          options: ["Huascarán", "Alpamayo", "Coropuna", "Yerupajá"],
           correctAnswer: "a",
         },
         {
@@ -1520,6 +1582,19 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
           question: "¿Qué héroe nacional peruano murió en la batalla de Arica?",
           type: "multiple-choice",
           options: ["Miguel Grau", "Francisco Bolognesi", "Andrés Avelino Cáceres", "José Olaya"],
+          correctAnswer: "b",
+        },
+        // Preguntas adicionales más difíciles
+        {
+          question: "¿Qué batalla selló la independencia de Perú y América del Sur?",
+          type: "multiple-choice",
+          options: ["Batalla de Ayacucho", "Batalla de Junín", "Batalla de Arica", "Batalla de Tarapacá"],
+          correctAnswer: "a",
+        },
+        {
+          question: "¿Quién fue el líder de la rebelión indígena contra los españoles en 1780?",
+          type: "multiple-choice",
+          options: ["Manco Inca", "Túpac Amaru II", "Atahualpa", "Huáscar"],
           correctAnswer: "b",
         },
       ]
@@ -1665,6 +1740,24 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
             "economía",
           ],
         },
+        // Preguntas adicionales más difíciles
+        {
+          question: "¿Qué tratado definió la frontera entre Perú y Colombia?",
+          type: "multiple-choice",
+          options: ["Tratado de Ancón", "Tratado Salomón-Lozano", "Tratado de Lima", "Tratado de Río de Janeiro"],
+          correctAnswer: "b",
+        },
+        {
+          question: "¿Qué político peruano fundó la Alianza Popular Revolucionaria Americana (APRA)?",
+          type: "multiple-choice",
+          options: [
+            "José Carlos Mariátegui",
+            "Víctor Raúl Haya de la Torre",
+            "Manuel González Prada",
+            "Luis Alberto Sánchez",
+          ],
+          correctAnswer: "b",
+        },
       ]
     } else {
       // hard
@@ -1746,7 +1839,7 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
           correctAnswer: "a",
         },
         {
-          question: "¿Qué presidente peruano implementó el 'Plan Inca'?",
+          question: "¿Qué presidente peruano implementó el Plan Inca?",
           type: "multiple-choice",
           options: ["Fernando Belaúnde Terry", "Juan Velasco Alvarado", "Francisco Morales Bermúdez", "Alan García"],
           correctAnswer: "b",
@@ -1827,6 +1920,29 @@ export function getQuestions(subject: string, difficulty: string): Question[] {
             "diplomacia",
             "conflicto",
           ],
+        },
+        // Preguntas adicionales más difíciles
+        {
+          question: "¿Qué fue la Confederación Perú-Boliviana y quién la lideró?",
+          type: "multiple-choice",
+          options: [
+            "Una alianza militar liderada por Simón Bolívar",
+            "Un estado unificado liderado por Andrés de Santa Cruz",
+            "Un tratado comercial liderado por Agustín Gamarra",
+            "Una unión política liderada por Ramón Castilla",
+          ],
+          correctAnswer: "b",
+        },
+        {
+          question: "¿Qué acontecimiento histórico se conoce como el 'Baguazo'?",
+          type: "multiple-choice",
+          options: [
+            "Una batalla durante la Guerra con Chile",
+            "Un enfrentamiento entre indígenas amazónicos y fuerzas del orden en 2009",
+            "Una revuelta campesina durante la reforma agraria",
+            "Un golpe de estado militar en la década de 1960",
+          ],
+          correctAnswer: "b",
         },
       ]
     }

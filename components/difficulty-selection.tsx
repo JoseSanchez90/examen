@@ -60,9 +60,9 @@ export default function DifficultySelection({ name, subject, onSelectDifficulty 
   }
 
   return (
-    <div className="px-6">
+    <div className="p-6 md:p-8">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-blue-700">¡Excelente elección, {name}! 😎</h2>
+        <h2 className="text-2xl font-bold text-gray-800">¡Excelente elección, {name}!</h2>
         <p className="text-gray-600 mt-2">
           Has elegido: <span className="font-semibold">{getSubjectName(subject)}</span>
         </p>
@@ -73,22 +73,22 @@ export default function DifficultySelection({ name, subject, onSelectDifficulty 
         variants={container}
         initial="hidden"
         animate="show"
-        className="grid grid-cols-1 md:grid-cols-3 gap-4 mx-auto"
+        className="grid grid-cols-1 gap-4 max-w-md mx-auto"
       >
         {difficulties.map((difficulty) => (
           <motion.div key={difficulty.id} variants={item}>
             <Card
-              className="cursor-pointer hover:shadow-lg transition-all duration-300 border-2 border-gray-200 hover:border-blue-300"
+              className="cursor-pointer hover:shadow-lg transition-all duration-300 border-0 bg-white/60 backdrop-blur-sm group"
               onClick={() => onSelectDifficulty(difficulty.id)}
             >
               <div className="flex items-center p-4">
                 <div
-                  className={`flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${difficulty.color} text-white mr-4 flex-shrink-0`}
+                  className={`flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r ${difficulty.color} text-white mr-4 flex-shrink-0 group-hover:scale-110 transition-transform duration-300`}
                 >
                   {difficulty.icon}
                 </div>
                 <div>
-                  <h3 className="font-bold text-lg">{difficulty.name}</h3>
+                  <h3 className="font-bold text-lg text-gray-800">{difficulty.name}</h3>
                   <p className="text-gray-600 text-sm">{difficulty.description}</p>
                 </div>
               </div>

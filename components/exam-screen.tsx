@@ -16,7 +16,7 @@ interface ExamScreenProps {
   name: string
   subject: string
   difficulty: string
-  onFinish: (score: number) => void
+  onFinish: (score: number, answers: Record<number, string>) => void
 }
 
 export default function ExamScreen({ name, subject, difficulty, onFinish }: ExamScreenProps) {
@@ -102,7 +102,7 @@ export default function ExamScreen({ name, subject, difficulty, onFinish }: Exam
       }
     })
 
-    onFinish(score)
+    onFinish(score, answers)
   }, [questions, answers, isSubmitting, onFinish])
 
   const formatTime = (seconds: number): string => {
@@ -119,10 +119,10 @@ export default function ExamScreen({ name, subject, difficulty, onFinish }: Exam
   }
 
   return (
-    <div className="">
+    <div className="p-6 md:p-8">
       <div className="flex justify-between items-center mb-4">
         <div>
-          <h2 className="text-xl font-bold text-blue-700">
+          <h2 className="text-xl font-bold text-gray-800">
             Pregunta {currentQuestionIndex + 1} de {questions.length}
           </h2>
         </div>
@@ -132,7 +132,7 @@ export default function ExamScreen({ name, subject, difficulty, onFinish }: Exam
         </div>
       </div>
 
-      <Progress value={progress} className="h-2 mb-6" />
+      <Progress value={progress} className="h-2 mb-6 bg-gray-200" />
 
       <AnimatePresence mode="wait">
         <motion.div
@@ -143,20 +143,20 @@ export default function ExamScreen({ name, subject, difficulty, onFinish }: Exam
           variants={questionAnimation}
           transition={{ duration: 0.3 }}
         >
-          <Card className="mb-6 border-2 border-blue-200">
+          <Card className="mb-6 border-0 bg-white/60 backdrop-blur-sm shadow-md">
             <CardContent className="p-6">
-              <h3 className="text-lg font-medium mb-4">{currentQuestion.question}</h3>
+              <h3 className="text-lg font-medium mb-4 text-gray-800">{currentQuestion.question}</h3>
 
               {currentQuestion.type === "multiple-choice" && (
                 <RadioGroup
                   value={answers[currentQuestionIndex] || ""}
                   onValueChange={handleAnswerChange}
-                  className=""
+                  className="space-y-3"
                 >
                   {currentQuestion.options?.map((option, index) => (
                     <div
                       key={index}
-                      className="flex items-center space-x-2 border rounded-lg p-3 hover:bg-gray-50 transition-colors"
+                      className="flex items-center space-x-2 border border-gray-200 rounded-lg p-3 hover:bg-gray-50 transition-colors"
                     >
                       <RadioGroupItem
                         value={String.fromCharCode(97 + index)}
@@ -176,7 +176,7 @@ export default function ExamScreen({ name, subject, difficulty, onFinish }: Exam
                     value={answers[currentQuestionIndex] || ""}
                     onChange={(e) => handleAnswerChange(e.target.value)}
                     placeholder="Escribe tu respuesta aquí..."
-                    className="w-full p-3"
+                    className="w-full p-3 border-gray-200"
                   />
                 </div>
               )}
@@ -190,19 +190,19 @@ export default function ExamScreen({ name, subject, difficulty, onFinish }: Exam
           onClick={handlePrevQuestion}
           disabled={currentQuestionIndex === 0}
           variant="outline"
-          className="flex items-center"
+          className="flex items-center border-gray-300 text-gray-700"
         >
           <ArrowLeft className="mr-1 h-4 w-4" /> Anterior
         </Button>
 
         {currentQuestionIndex < questions.length - 1 ? (
-          <Button onClick={handleNextQuestion} className="flex items-center bg-blue-600 hover:bg-blue-700 cursor-pointer">
+          <Button onClick={handleNextQuestion} className="flex items-center bg-blue-600 hover:bg-blue-700">
             Siguiente <ArrowRight className="ml-1 h-4 w-4" />
           </Button>
         ) : (
           <Button
             onClick={handleFinishExam}
-            className="flex items-center bg-green-600 hover:bg-green-700 cursor-pointer"
+            className="flex items-center bg-green-600 hover:bg-green-700"
             disabled={isSubmitting}
           >
             Terminar Examen <CheckCircle className="ml-1 h-4 w-4" />
